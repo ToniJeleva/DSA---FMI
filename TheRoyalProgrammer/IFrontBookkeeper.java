@@ -1,6 +1,6 @@
 package first;
 
 public interface IFrontBookkeeper {
-	public String updateFront(String news);
+	public String updateFront(String[] news);
 
 }
