@@ -49,40 +49,40 @@ public class AVLTree {
 		return height(node.left) - height(node.right);
 	}
 
-	private AVLNode insert(AVLNode node, int data) {
-		if (node == null) {
+	private AVLNode insert(AVLNode root, int data) {
+		if (root == null) {
 			return (new AVLNode(data));
 		}
 
-		if (data < node.data) {
-			node.left = insert(node.left, data);
+		if (data < root.data) {
+			root.left = insert(root.left, data);
 		} else {
-			node.right = insert(node.right, data);
+			root.right = insert(root.right, data);
 		}
 
-		node.height = max(height(node.left), height(node.right)) + 1;
+		root.height = max(height(root.left), height(root.right)) + 1;
 
-		int balance = getBalance(node);
+		int balance = getBalance(root);
 
-		if (balance > 1 && data < node.left.data) {
-			return rightRotate(node);
+		if (balance > 1 && data < root.left.data) {
+			return rightRotate(root);
 		}
 
-		if (balance < -1 && data > node.right.data) {
-			return leftRotate(node);
+		if (balance < -1 && data > root.right.data) {
+			return leftRotate(root);
 		}
 
-		if (balance > 1 && data > node.left.data) {
-			node.left = leftRotate(node.left);
-			return rightRotate(node);
+		if (balance > 1 && data > root.left.data) {
+			root.left = leftRotate(root.left);
+			return rightRotate(root);
 		}
 
-		if (balance < -1 && data < node.right.data) {
-			node.right = rightRotate(node.right);
-			return leftRotate(node);
+		if (balance < -1 && data < root.right.data) {
+			root.right = rightRotate(root.right);
+			return leftRotate(root);
 		}
 
-		return node;
+		return root;
 	}
 
 	public void delete(int key) {
