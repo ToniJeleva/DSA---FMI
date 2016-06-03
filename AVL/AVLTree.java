@@ -1,4 +1,4 @@
-package avl;
+package AVL;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -64,20 +64,20 @@ public class AVLTree {
 
 		int balance = getBalance(root);
 
-		if (balance > 1 && data < root.left.data) {
+		if (balance > 1 && getBalance(root.left) >= 0) {
 			return rightRotate(root);
 		}
 
-		if (balance < -1 && data > root.right.data) {
-			return leftRotate(root);
-		}
-
-		if (balance > 1 && data > root.left.data) {
+		if (balance > 1 && getBalance(root.left) < 0) {
 			root.left = leftRotate(root.left);
 			return rightRotate(root);
 		}
 
-		if (balance < -1 && data < root.right.data) {
+		if (balance < -1 && getBalance(root.right) <= 0) {
+			return leftRotate(root);
+		}
+
+		if (balance < -1 && getBalance(root.right) > 0) {
 			root.right = rightRotate(root.right);
 			return leftRotate(root);
 		}
@@ -85,6 +85,7 @@ public class AVLTree {
 		return root;
 	}
 
+	
 	public void delete(int key) {
 		head = deleteNode(head, key);
 	}
